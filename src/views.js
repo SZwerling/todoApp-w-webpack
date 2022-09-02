@@ -1,8 +1,5 @@
 import { getFilters } from "./filters";
-import { getTodos, toggleTodo, removeTodo, saveTodos } from "./todos";
-// renderTodos
-// Arguments: none
-// Return value: none
+import { getTodos, toggleTodo, removeTodo } from "./todos";
 
 const rendertodos = () => {
     const todos = getTodos()
@@ -33,9 +30,6 @@ const rendertodos = () => {
     }
  };
 
-// generateTodoDOM
-// Arguments: todo
-// Return value: the todo element
 
 const generateTodoDOM = (todo) => {
     const rootDiv = document.createElement("label");
@@ -49,11 +43,8 @@ const generateTodoDOM = (todo) => {
     checkbox.checked = todo.completed;
     containerEl.appendChild(checkbox);
     checkbox.addEventListener("change", () => {
-       //toggle completed checkbox, save and rerender.
-       toggleTodo(todo.id)
-    //    todo.completed = !todo.completed;
-       saveTodos();
-       rendertodos();
+       toggleTodo(todo.id) //toggle checkbox (save() is in function)
+       rendertodos();      //then rerender
     });
  
     //set up todo text
@@ -72,7 +63,6 @@ const generateTodoDOM = (todo) => {
  
     button.addEventListener("click", () => {
        removeTodo(todo.id);
-       saveTodos();
        rendertodos();
     });
     
@@ -80,11 +70,7 @@ const generateTodoDOM = (todo) => {
  };
  
 
-// generateSummaryDOM
-// Arguments: incompletedTodos
-// Return value: the summary element
-
-//Todos left to do message
+//Todos left message
 const generateSummaryDOM = (incompleteTodos) => {
     const todoMessage = document.createElement("h2");
     todoMessage.classList.add("list-title")
@@ -95,6 +81,4 @@ const generateSummaryDOM = (incompleteTodos) => {
  };
  
 
-// Make sure to set up the exports
-
-export { rendertodos, generateTodoDOM, generateSummaryDOM}
+export { rendertodos, generateSummaryDOM}
